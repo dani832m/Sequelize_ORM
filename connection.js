@@ -1,11 +1,14 @@
-// Setting up a connection
-const Sequelize = require('sequelize');
+// 1. SETTING UP A CONNECTION \\
 
+const Sequelize = require('sequelize'); // Include Sequelize module
+
+// Create new Sequelize object
 const sequelize = new Sequelize('sequelizedb', 'root', '1234', {
   host: 'localhost',
   dialect: 'mysql',
   operatorsAliases: false,
 
+  // Max and min connections to db
   pool: {
     max: 5,
     min: 0,
@@ -15,18 +18,21 @@ const sequelize = new Sequelize('sequelizedb', 'root', '1234', {
 
 });
 
-// Test the connection
+// 2. TEST THE CONNECTION \\
+
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    console.log('Connection has been established successfully.'); // Success
   })
   .catch(err => {
-    console.error('Unable to connect to the database:', err);
+    console.error('Unable to connect to the database:', err); // Fail
   });
 
-// Create table 'user' with colomn 'firstName' and 'lastName'
-const User = sequelize.define('user', {
+
+// 3. CREATE FIRST MODULE \\
+
+const User = sequelize.define('user', { // Create table 'user' with colomn 'firstName' and 'lastName'
 firstName: {
     type: Sequelize.STRING
 },
